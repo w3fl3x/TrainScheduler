@@ -67,7 +67,11 @@ database.ref().on('child_added', function(childSnapshot) {
     console.log(trainFrequency);
 
     // Calculate time
-
+    var minAway;
+    var trainNextArrival = moment().add(minAway, 'minutes');
+    trainNextArrival = moment(trainNextArrival).format('hh:mm');
+    // Minutes away
+    var trainMinutesAway = childSnapshot.val().trainFrequency - remainder;
 
     // Create the new row
     var newRow = $('<tr>').append(
