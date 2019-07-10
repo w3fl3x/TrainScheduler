@@ -1,4 +1,20 @@
+html, body {
+    background: url("../images/real_cf.png");
+}
+
 .card-header {
     color: white;
     font-weight: bold;
+}
+
+.form-group, #train-table {
+    color: #009ada;
+}
+
+#add-train-btn {
+    background-color: #009ada;
+}
+
+#add-train-btn:hover {
+    background-color: #0781be;
 }
