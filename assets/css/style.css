@@ -1,5 +1,6 @@
 html, body {
-    background: url("../images/real_cf.png");
+    background: url("../images/railway.jpg");
+    background-size: cover;
 }
 
 .card-header {
@@ -17,4 +18,8 @@ html, body {
 
 #add-train-btn:hover {
     background-color: #0781be;
+}
+
+.jumbotron, .card {
+    opacity: .9;
 }

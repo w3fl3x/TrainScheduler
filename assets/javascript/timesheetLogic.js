@@ -71,7 +71,7 @@ database.ref().on('child_added', function(childSnapshot) {
 
     // Calculate time
     var trainMinutesAway;
-    var firstTrainNew = moment(childSnapshot.val().trainFirstTime, 'hh:mm').subtract('1, years');
+    var firstTrainNew = moment(childSnapshot.val().trainFirstTime, 'hh:mm').subtract(1, 'years');
     // Dif between current and firstTrainTime
     var diffTime = moment().diff(moment(firstTrainNew), 'minutes');
     var remainder = diffTime % childSnapshot.val().frequency;
