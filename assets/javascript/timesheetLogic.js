@@ -65,6 +65,7 @@ database.ref().on('child_added', function(childSnapshot) {
     var trainDestination = childSnapshot.val().destination;
     var trainFirstTime = childSnapshot.val().time;
     var trainFrequency = childSnapshot.val().frequency;
+    var key = childSnapshot.key;
 
     // Train info
     console.log(trainName);
@@ -93,7 +94,8 @@ database.ref().on('child_added', function(childSnapshot) {
         $('<td>').text(trainFrequency),
         $('<td>').text(trainNextArrival),
         $('<td>').text(trainMinutesAway),
-        $('<td class=\'text-center\'><button class=\'delete btn btn-primary btn-xs\' id=\'remove-train\' data-key=\'" + key + "\'>X</button></td>')
+        $('<td class=\'text-center\'><button class=\'delete btn btn-primary btn-xs float-left\' id=\'remove-train\' data-key=\'" + key + "\'>X</button></td>' + key)
+        // $('<td>').innerHTML(<button class='delete btn btn-primary btn-xs' id='remove-train' data-key='" + key + "'>X</button>)
     );
 
     // Append the new row to the table
