@@ -24,36 +24,36 @@ function currentTime() {
 $('#add-train-btn').on('click', function(event) {
     event.preventDefault();
 
-    // Grab user iput
-    var trainName = $('#train-input').val().trim();
-    var trainDestination = $('#destination-input').val().trim();
-    var trainFirstTime = $('#first-time-input').val().trim();
-    var trainFrequency = $('#frequency-input').val().trim();
+   // Grab user iput
+   var trainName = $('#train-input').val().trim();
+   var trainDestination = $('#destination-input').val().trim();
+   var trainFirstTime = $('#first-time-input').val().trim();
+   var trainFrequency = $('#frequency-input').val().trim();
 
-    // Create Local 'temp' object for holding train data
-    var newTrain = {
-        train: trainName,
-        destination: trainDestination,
-        time: trainFirstTime,
-        frequency: trainFrequency
-    };
+   // Create Local 'temp' object for holding train data
+   var newTrain = {
+       train: trainName,
+       destination: trainDestination,
+       time: trainFirstTime,
+       frequency: trainFrequency
+   };
 
-    // Upload train data to database
-    database.ref().push(newTrain);
+   // Upload train data to database
+   database.ref().push(newTrain);
 
-    // Console log everything
-    console.log(newTrain.train);
-    console.log(newTrain.destination);
-    console.log(newTrain.time);
-    console.log(newTrain.frequency);
+   // Console log everything
+   console.log(newTrain.train);
+   console.log(newTrain.destination);
+   console.log(newTrain.time);
+   console.log(newTrain.frequency);
 
-    alert('Train successfully added');
+   alert('Train successfully added');
 
-    // Clear all of text boxes
-    $('#train-input').val('');
-    $('#destination-input').val('');
-    $('#first-time-input').val('');
-    $('#frequency-input').val('');
+   // Clear all of text boxes
+   $('#train-input').val('');
+   $('#destination-input').val('');
+   $('#first-time-input').val('');
+   $('#frequency-input').val('');
 });
 
 // Create Firebase event for adding train to database and row in html
