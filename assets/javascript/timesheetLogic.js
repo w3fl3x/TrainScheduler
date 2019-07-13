@@ -67,7 +67,7 @@ database.ref().on('child_added', function(childSnapshot) {
     console.log(trainFrequency);
 
     // Prettify next arrival time
-    var trainNextArrival = moment.unix(trainFirstTime).format('hh:mm A');
+    var trainNextArrival = moment.unix(trainFirstTime).format('hh:mm');
 
     // Calculate time
     var trainMinutesAway;
