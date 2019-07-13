@@ -14,6 +14,12 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
+function currentTime() {
+    var current = moment().format('LT');
+    $('#currentTime').html(current);
+    setTimeout(currentTime, 1000);
+};
+
 // Button for adding train
 $('#add-train-btn').on('click', function(event) {
     event.preventDefault();
@@ -67,23 +73,18 @@ database.ref().on('child_added', function(childSnapshot) {
     console.log(trainFrequency);
 
     // Prettify next arrival time
-    var trainNextArrival = moment.unix(trainFirstTime).format('hh:mm');
+    var trainNextArrival = moment.unix(trainFirstTime).format('LT');
 
     // Calculate time
     var trainMinutesAway;
-    var firstTrainNew = moment(childSnapshot.val().trainFirstTime, 'hh:mm').subtract(1, 'years');
+    var firstTrain = moment(childSnapshot.val().time, 'hh:mm').subtract(1, 'years');
     // Dif between current and firstTrainTime
-    var diffTime = moment().diff(moment(firstTrainNew), 'minutes');
+    var diffTime = moment().diff(moment(firstTrain), 'minutes');
     var remainder = diffTime % childSnapshot.val().frequency;
     // Minutes until next train
     var trainMinutesAway = childSnapshot.val().frequency - remainder;
     // Next train time
-    var trainNextArrival = moment().add(trainMinutesAway, 'minutes').format('hh:mm A');
-    // trainNextArrival = moment(trainNextArrival).format('hh:mm A');
-    // var trainNextArrival = moment().add(minAway, 'minutes');
-    // trainNextArrival = moment(trainNextArrival).format('hh:mm');
-    // // Minutes away
-    // var trainMinutesAway = childSnapshot.val().trainFrequency - remainder;
+    var trainNextArrival = moment().add(trainMinutesAway, 'minutes').format('LT');
 
     // Create the new row
     var newRow = $('<tr>').append(
@@ -91,9 +92,22 @@ database.ref().on('child_added', function(childSnapshot) {
         $('<td>').text(trainDestination),
         $('<td>').text(trainFrequency),
         $('<td>').text(trainNextArrival),
-        $('<td>').text(trainMinutesAway)
+        $('<td>').text(trainMinutesAway),
+        $('<td class=\'text-center\'><button class=\'arrival btn btn-primary btn-xs\' id=\'remove-train\' data-key=\'" + key + "\'>X</button></td>')
     );
 
     // Append the new row to the table
     $('#train-table > tbody').append(newRow);
 });
+
+$(document).on('click', '.arrival', function() {
+    keyref = $(this).attr('data-key');
+    database.ref().child(keyref).remove();
+    window.location.reload;
+});
+
+currentTime();
+
+setInterval(function() {
+    window.location.reload();
+}, 60000);
