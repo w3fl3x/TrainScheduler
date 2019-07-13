@@ -55,7 +55,7 @@ database.ref().on('child_added', function(childSnapshot) {
     console.log(childSnapshot.val());
 
     // Store everything into a variable
-    var trainName = childSnapshot.val().name;
+    var trainName = childSnapshot.val().train;
     var trainDestination = childSnapshot.val().destination;
     var trainFirstTime = childSnapshot.val().time;
     var trainFrequency = childSnapshot.val().frequency;
@@ -67,19 +67,19 @@ database.ref().on('child_added', function(childSnapshot) {
     console.log(trainFrequency);
 
     // Prettify next arrival time
-    var trainNextArrivalPretty = moment.unix(trainFirstTime).format('LT');
+    var trainNextArrival = moment.unix(trainFirstTime).format('hh:mm A');
 
     // Calculate time
-    var minAway;
-    var firstTrainNew = moment(childSnapshot.val().trainFirstTime, 'hh:mm').subtract(1, 'years');
+    var trainMinutesAway;
+    var firstTrainNew = moment(childSnapshot.val().trainFirstTime, 'hh:mm').subtract('1, years');
     // Dif between current and firstTrainTime
     var diffTime = moment().diff(moment(firstTrainNew), 'minutes');
     var remainder = diffTime % childSnapshot.val().frequency;
     // Minutes until next train
-    var minAway = childSnapshot.val().frequency - remainder;
+    var trainMinutesAway = childSnapshot.val().frequency - remainder;
     // Next train time
-    var trainMinutesAway = moment().add(minAway, 'minutes');
-    trainMinutesAway = moment(trainMinutesAway).format('hh:mm');
+    var trainNextArrival = moment().add(trainMinutesAway, 'minutes').format('hh:mm A');
+    // trainNextArrival = moment(trainNextArrival).format('hh:mm A');
     // var trainNextArrival = moment().add(minAway, 'minutes');
     // trainNextArrival = moment(trainNextArrival).format('hh:mm');
     // // Minutes away
@@ -90,7 +90,7 @@ database.ref().on('child_added', function(childSnapshot) {
         $('<td>').text(trainName),
         $('<td>').text(trainDestination),
         $('<td>').text(trainFrequency),
-        $('<td>').text(trainNextArrivalPretty),
+        $('<td>').text(trainNextArrival),
         $('<td>').text(trainMinutesAway)
     );
 
