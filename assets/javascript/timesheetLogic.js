@@ -93,14 +93,14 @@ database.ref().on('child_added', function(childSnapshot) {
         $('<td>').text(trainFrequency),
         $('<td>').text(trainNextArrival),
         $('<td>').text(trainMinutesAway),
-        $('<td class=\'text-center\'><button class=\'arrival btn btn-primary btn-xs\' id=\'remove-train\' data-key=\'" + key + "\'>X</button></td>')
+        $('<td class=\'text-center\'><button class=\'delete btn btn-primary btn-xs\' id=\'remove-train\' data-key=\'" + key + "\'>X</button></td>')
     );
 
     // Append the new row to the table
     $('#train-table > tbody').append(newRow);
 });
 
-$(document).on('click', '.arrival', function() {
+$(document).on('click', '.delete', function() {
     keyref = $(this).attr('data-key');
     database.ref().child(keyref).remove();
     window.location.reload;
