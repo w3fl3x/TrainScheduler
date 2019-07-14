@@ -12,11 +12,11 @@ html, body {
     color: #009ada;
 }
 
-#add-train-btn, #remove-train {
+#add-train-btn, .btn-xs {
     background-color: #009ada;
 }
 
-#add-train-btn:hover, #remove-train:hover {
+#add-train-btn:hover, .btn-xs:hover {
     background-color: #0781be;
 }
 

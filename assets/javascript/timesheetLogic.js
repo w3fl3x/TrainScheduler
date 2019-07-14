@@ -47,7 +47,7 @@ $('#add-train-btn').on('click', function(event) {
    console.log(newTrain.time);
    console.log(newTrain.frequency);
 
-   alert('Train successfully added');
+//    alert('Train successfully added');
 
    // Clear all of text boxes
    $('#train-input').val('');
@@ -94,20 +94,23 @@ database.ref().on('child_added', function(childSnapshot) {
         $('<td>').text(trainFrequency),
         $('<td>').text(trainNextArrival),
         $('<td>').text(trainMinutesAway),
-        $('<td class=\'text-center\'><button class=\'delete btn btn-primary btn-xs float-left\' id=\'remove-train\' data-key=\'" + key + "\'>X</button></td>' + key)
-        // $('<td>').innerHTML(<button class='delete btn btn-primary btn-xs' id='remove-train' data-key='" + key + "'>X</button>)
+        $("<td class='text-center'><button class='delete btn btn-sr-only btn-xs' data-key='" + key + "'>X</button></td>")
     );
 
     // Append the new row to the table
     $('#train-table > tbody').append(newRow);
 });
 
+// Click event to delete row of train data
 $(document).on('click', '.delete', function() {
     keyref = $(this).attr('data-key');
-    database.ref().child(keyref).remove();
+    // alert(keyref)
     window.location.reload;
+    database.ref().child(keyref).remove();
+    window.location.reload();
 });
 
+// Reload page every 60 seconds and show latest minutes away
 currentTime();
 
 setInterval(function() {
