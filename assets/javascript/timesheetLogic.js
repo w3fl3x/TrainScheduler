@@ -101,6 +101,8 @@ database.ref().on('child_added', function(childSnapshot) {
     $('#train-table > tbody').append(newRow);
 });
 
+///// Bonus
+
 // Click event to delete row of train data
 $(document).on('click', '.delete', function() {
     keyref = $(this).attr('data-key');
