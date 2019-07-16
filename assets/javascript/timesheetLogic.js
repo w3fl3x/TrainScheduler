@@ -47,7 +47,7 @@ $('#add-train-btn').on('click', function(event) {
    console.log(newTrain.time);
    console.log(newTrain.frequency);
 
-//    alert('Train successfully added');
+   alert('Train successfully added');
 
    // Clear all of text boxes
    $('#train-input').val('');
